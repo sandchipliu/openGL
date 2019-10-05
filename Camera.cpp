@@ -1,12 +1,19 @@
 #include "Camera.h"
 
-Camera::Camera(glm::vec3 position,glm::vec3 direction)
+Camera::Camera(ECameraType type,glm::vec3 position,glm::vec3 direction,glm::vec3  rotation)
 {
-    this->Postion = position;
-    this->Direction = direction;
+    this->type = type;
+    this->postion = position;
+    this->direction = direction;
+    this->rotation = rotation;
 }
 
 Camera::~Camera()
 {
 
 }
+
+ void Camera::lookAt(glm::vec3 target)
+ {
+
+ }

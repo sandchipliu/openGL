@@ -49,7 +49,7 @@ bool Window::createWindow()
     return true;
 }
 
-void Window::loop(void (*func)())
+void Window::update(void (*func)())
 {
     while(!glfwWindowShouldClose(this->win))
     {

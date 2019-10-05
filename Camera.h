@@ -6,33 +6,24 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
 
-enum ECameraMovement{
-    FORMARD,
-    BACKWARD,
-    LEFT,
-    RIGTH
+enum ECameraType{
+    Perspective=0,  //正交
+    Orthographic=1 //
 };
-
-const float YAW = 0.0f;
-const float PITCH = 0.0f;
-const float SPEED = 2.5f;
-const float SENSITIVTY = 0.1f;
-const float ZOOM = 45.0f;
 
 class Camera
 {
 private:
 
 public:
-    glm::vec3 Postion;
-    glm::vec3 Direction;
-   
-    float MovementSpeed;
-    float MouseSensitivity;
-    float Zoom;
+    ECameraType type;
+    glm::vec3 postion;
+    glm::vec3 direction;
+    glm::vec3  rotation;
 public:
-    Camera(glm::vec3 position,glm::vec3 direction);
+    Camera(ECameraType type,glm::vec3 position,glm::vec3 direction,glm::vec3  rotation);
     ~Camera();
+    void lookAt(glm::vec3 target);
 };
 
 #endif

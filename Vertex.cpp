@@ -12,6 +12,13 @@ Vertex::~Vertex()
 {
 }
 
+void Vertex::showMaxVertexAttribs()
+{
+	int nrAttributes;
+	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+	std::cout << "Maximum  of vertex attributes supported: " << nrAttributes << std::endl;
+}
+
 void Vertex::addVAO(GLuint index)
 {
     glGenVertexArrays(index,&this->VAO);

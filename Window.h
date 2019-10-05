@@ -15,7 +15,7 @@ private:
 public:
     Window(/* args */);
     ~Window();
-    void loop(void (*func)());
+    void update(void (*func)());
 };
 
 #endif
