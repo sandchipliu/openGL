@@ -10,13 +10,9 @@ Vertex::Vertex(GLfloat vertices[],GLuint vertexLen)
 
 Vertex::~Vertex()
 {
-}
-
-void Vertex::showMaxVertexAttribs()
-{
-	int nrAttributes;
-	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
-	std::cout << "Maximum  of vertex attributes supported: " << nrAttributes << std::endl;
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
 }
 
 void Vertex::addVAO(GLuint index)

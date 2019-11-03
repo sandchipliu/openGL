@@ -1,11 +1,14 @@
 #include "Camera.h"
 
-Camera::Camera(ECameraType type,glm::vec3 position,glm::vec3 direction,glm::vec3  rotation)
+Camera::Camera(Program *program, glm::vec3 position)
 {
-    this->type = type;
+    this->program = program;
     this->postion = position;
-    this->direction = direction;
-    this->rotation = rotation;
+    // this->rotation = rotation;
+
+    this->view = glm::translate(this->view,postion);
+    // this->view = glm::rotate(this->view,)
+    program->setMat4("view", glm::value_ptr(this->view));
 }
 
 Camera::~Camera()
@@ -13,7 +16,18 @@ Camera::~Camera()
 
 }
 
- void Camera::lookAt(glm::vec3 target)
- {
+glm::mat4 Camera::Perspective(float fovy,float ascpt,float near,float far)
+{
+    // this->eProjection = EProjection.Perspective;
+    this->projection = glm::perspective(fovy,ascpt,near,far);
+    this->program->setMat4("projection", glm::value_ptr(this->projection));
+    return this->projection;
+}
 
- }
+glm::mat4 Camera::Ortho(float left,float right,float buttom,float top)
+{
+    this->projection = glm::ortho(left,right,buttom,top);
+    this->program->setMat4("projection", glm::value_ptr(this->projection));
+    return this->projection;
+}
+

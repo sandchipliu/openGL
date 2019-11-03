@@ -4,9 +4,11 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <vector>
+#include "Program.h"
 
-enum ECameraType{
+enum EProjection{
     Perspective=0,  //正交
     Orthographic=1 //
 };
@@ -14,16 +16,21 @@ enum ECameraType{
 class Camera
 {
 private:
-
-public:
-    ECameraType type;
+    Program* program;
     glm::vec3 postion;
-    glm::vec3 direction;
-    glm::vec3  rotation;
+    glm::vec3 rotation;
 public:
-    Camera(ECameraType type,glm::vec3 position,glm::vec3 direction,glm::vec3  rotation);
+    EProjection eProjection;
+    glm::mat4 view;
+    glm::mat4 projection;
+
+private:
+    
+public:
+    Camera(Program *program, glm::vec3 position);
+    glm::mat4 Perspective(float fovy,float ascpt,float near,float far);
+    glm::mat4 Ortho(float left,float right,float buttom,float top);
     ~Camera();
-    void lookAt(glm::vec3 target);
 };
 
 #endif

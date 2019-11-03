@@ -8,10 +8,10 @@ Texture::Texture(GLenum texture)
     glGenTextures(1,&this->id);
     glActiveTexture(texture);
     glBindTexture(GL_TEXTURE_2D,this->id);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+    // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST);
+    // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 }
 
 Texture::~Texture()
@@ -21,6 +21,23 @@ Texture::~Texture()
 GLuint Texture::getID()
 {
     return this->id;
+}
+
+void Texture::setParam(GLenum target, GLenum pname, GLint param)
+{
+    glTexParameteri(target,pname,param);
+}
+
+void Texture::setWrap(GLenum target, const GLint sParams, const GLint tParams)
+{
+    this->setParam(target,GL_TEXTURE_WRAP_S,sParams);
+    this->setParam(target,GL_TEXTURE_WRAP_T,tParams);
+}
+
+void Texture::setFilter(GLenum target, const GLint minParams, const GLint magParams)
+{
+    this->setParam(target,GL_TEXTURE_MIN_FILTER,minParams);
+    this->setParam(target,GL_TEXTURE_MAG_FILTER,magParams);
 }
 
 bool Texture::loadTexture(const char* name)
@@ -44,4 +61,9 @@ void Texture::activeTexure()
 {
     glActiveTexture(this->texture);
     glBindTexture(GL_TEXTURE_2D,this->id);
+}
+
+void Texture::enableMipmap()
+{
+    glGenerateMipmap(GL_TEXTURE_2D);
 }

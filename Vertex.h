@@ -18,7 +18,6 @@ public:
     GLuint getVAO();
     GLuint getVBO();
     GLuint getEBO();
-    void showMaxVertexAttribs();
     void addVAO(GLuint index);
     void addVBO(GLuint index);
     void addEBO(GLuint index,GLuint *indices,GLuint indexLen);

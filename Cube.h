@@ -1,17 +1,20 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-#include "Model.h"
+#include "Object.h"
 #include "Texture.h"
+#include "Program.h"
 
-class Square:public Model
+class Cube:public Object
 {
 private:
     Texture *texture0;
     Texture *texture1;
+    Program *program;
+
 public:
-    Square(/* args */);
-    ~Square();
+    Cube(Program *program);
+    ~Cube();
     void update();
 };
 
